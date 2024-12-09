@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #sub{
+            background-color: rgb(158, 45, 214);
+            color: white;
+            border: 3px solid rgb(158, 45, 214);
+        }
+    </style>
+</head>
+<body>
+    <form id="form">
+        <input type="text" id="ip" placeholder="add a todo">
+        <input type="submit" value="add" id="sub">
+    </form>
+    <ul id="list"></ul> 
+    <script>
+        let form=document.getElementById("form")
+        let ip=document.getElementById("ip")
+        let list=document.getElementById("list")
+        ip.style.border="3px solid plum"
+        form.addEventListener("submit",(e)=>{
+            e.preventDefault();     
+            let listItem=document.createElement("li")
+            listItem.innerText=ip.value + "   "
+            listItem.style.color="red"
+            listItem.style.fontSize="25px"
+            let btn=document.createElement("button")
+            btn.style.backgroundColor="orange"
+            btn.style.color="white"
+            btn.style.border="none" 
+            btn.innerText="DELETE";
+            btn.addEventListener("click",()=>{
+                let confirm=window.confirm("are your sure?")
+                if(confirm){
+                    list.removeChild(listItem)
+                }
+            })
+            editbtn=document.createElement("button");
+            editbtn.innerText="EDIT";
+            editbtn.style.backgroundColor="blue"
+            editbtn.style.border="none"
+            editbtn.style.color="white"
+            editbtn.style.width="60px"
+            editbtn.addEventListener("click",()=>{
+                let newTodoText = prompt("Edit your todo:");
+                if (newTodoText !== null && newTodoText !== "") {
+                    listItem.firstChild.textContent = newTodoText + "   "; // Update the todo text
+                }
+            })
+
+
+            listItem.append(editbtn)
+            listItem.appendChild(btn);
+            list.appendChild(listItem);
+            ip.value=""
+
+        })
+    </script>
+</body>
+</html>
